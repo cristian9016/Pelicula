@@ -17,17 +17,15 @@ import javax.inject.Singleton
 @Module
 class NetModule {
 
-
     @Provides
     @Singleton
     fun provideRetrofit(context: Context): Retrofit = Retrofit.
             Builder()
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder()
-                    .setDateFormat("dd/MM/yyyy")
                     .create()
             ))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-            .baseUrl("https://gankotest.herokuapp.com/")
+            .baseUrl("https://api.themoviedb.org/")
             .build()
 
     @Provides

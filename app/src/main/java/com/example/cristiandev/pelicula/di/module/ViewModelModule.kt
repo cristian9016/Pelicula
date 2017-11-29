@@ -2,7 +2,7 @@ package com.example.cristiandev.pelicula.di.module
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.example.cristiandev.pelicula.ui.MainViewModel
+import com.example.cristiandev.pelicula.ui.fragments.MainViewModel
 import com.example.cristiandev.pelicula.utils.AppViewModelFactory
 import dagger.Binds
 import dagger.MapKey
@@ -28,5 +28,5 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel::class)
-    abstract fun bindFarmViewModel(viewModel: MainViewModel): ViewModel
+    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 }

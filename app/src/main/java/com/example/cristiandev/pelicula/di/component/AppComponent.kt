@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.cristiandev.pelicula.App
 import com.example.cristiandev.pelicula.di.ActivityBuilder
 import com.example.cristiandev.pelicula.di.module.AppModule
+import com.example.cristiandev.pelicula.di.module.FragmentModule
 import com.example.cristiandev.pelicula.di.module.NetModule
 import com.example.cristiandev.pelicula.di.module.ViewModelModule
 import dagger.BindsInstance
@@ -22,7 +23,7 @@ import javax.inject.Singleton
         NetModule::class,
         ViewModelModule::class
 ))
-        interface AppComponent{
+interface AppComponent{
     fun inject(app:App)
 
     @Component.Builder
