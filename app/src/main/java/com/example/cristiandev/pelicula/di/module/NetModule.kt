@@ -2,6 +2,7 @@ package com.example.cristiandev.pelicula.di.module
 
 import android.content.Context
 import com.example.cristiandev.pelicula.net.PeliculaClient
+import com.example.cristiandev.pelicula.net.SerieClient
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -32,5 +33,9 @@ class NetModule {
     @Singleton
     fun providePeliculaClient(retrofit: Retrofit): PeliculaClient =
             retrofit.create(PeliculaClient::class.java)
+    @Provides
+    @Singleton
+    fun provideSerieClient(retrofit: Retrofit): SerieClient =
+            retrofit.create(SerieClient::class.java)
 
 }

@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_all"
-        android:title="Todas"/>
-    <item android:id="@+id/menu_popular"
-        android:title="Popular"/>
-    <item android:id="@+id/menu_toprated"
-        android:title="Top Rated"/>
-    <item android:id="@+id/menu_upcoming"
-        android:title="Upcoming"/>
+
+    <item android:id="@+id/menu_todas_peliculas"
+        android:title="Peliculas">
+        <menu>
+            <item android:id="@+id/movie_popular"
+                android:title="Popular"/>
+            <item android:id="@+id/movie_toprated"
+                android:title="Top Rated"/>
+            <item android:id="@+id/movie_upcoming"
+                android:title="Upcoming"/>
+        </menu>
+    </item>
+    <item android:id="@+id/menu_series"
+        android:title="Series">
+        <menu>
+            <item android:id="@+id/series_popular"
+                android:title="Popular"/>
+            <item android:id="@+id/series_top_rated"
+                android:title="Top Rated"/>
+        </menu>
+
+    </item>
+
+
 </menu>

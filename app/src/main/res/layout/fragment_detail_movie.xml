@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:color/black"
-            app:imgUrl="@{pelicula.poster_path}"
+            app:imgUrl='@{"https://image.tmdb.org/t/p/w500"+pelicula.poster_path}'
             />
 
         <android.support.constraint.Guideline
@@ -75,7 +75,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/movieTitle"
             app:layout_constraintTop_toBottomOf="@+id/movieTitle"
-            tools:text="Release Date: " />
+            android:text="Release Date: " />
 
         <TextView
             android:id="@+id/releaseDate"
@@ -97,7 +97,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="@+id/textview11"
             app:layout_constraintTop_toBottomOf="@+id/textview11"
-            tools:text="Vote Average:" />
+            android:text="Vote Average:" />
 
         <TextView
             android:id="@+id/voteAverage"

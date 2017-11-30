@@ -33,7 +33,7 @@ class MainActivity @Inject constructor(): AppCompatActivity(), HasSupportFragmen
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         drawer.addDrawerListener(this)
         nav.setNavigationItemSelectedListener { setContent(it) }
-        putFragment(R.id.container,MainFragment.instance())
+        putFragment(R.id.container,MainFragment.instance("movie_popular"))
     }
 
     fun putFragment(container: Int, fragment: Fragment) {
@@ -46,8 +46,11 @@ class MainActivity @Inject constructor(): AppCompatActivity(), HasSupportFragmen
     fun setContent(item: MenuItem?): Boolean {
         drawer.closeDrawers()
         when(item?.itemId){
-            R.id.menu_all -> putFragment(R.id.container, MainFragment.instance())
-        //...
+            R.id.movie_popular -> putFragment(R.id.container,MainFragment.instance("movie_popular"))
+            R.id.movie_toprated -> putFragment(R.id.container,MainFragment.instance("movie_top_rated"))
+            R.id.movie_upcoming -> putFragment(R.id.container,MainFragment.instance("movie_upcoming"))
+            R.id.series_popular -> putFragment(R.id.container,MainFragment.instance("series_popular"))
+            R.id.series_top_rated -> putFragment(R.id.container,MainFragment.instance("series_top_rated"))
         }
         return true
     }

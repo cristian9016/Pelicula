@@ -6,7 +6,7 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.cristiandev.pelicula.R
 import com.example.cristiandev.pelicula.data.model.Pelicula
-import com.example.cristiandev.pelicula.net.ResponseData
+import com.example.cristiandev.pelicula.net.ResponseDataPelicula
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -50,7 +50,7 @@ fun <T> Observable<T>.applySchedulers(): Observable<T> {
     }
 }
 
-fun validateResponse(res: ResponseData) = Observable.create<List<Pelicula>> {
+fun validateResponse(res: ResponseDataPelicula) = Observable.create<List<Pelicula>> {
     if (res.results.isNotEmpty()) it.onNext(res.results)
 }
 

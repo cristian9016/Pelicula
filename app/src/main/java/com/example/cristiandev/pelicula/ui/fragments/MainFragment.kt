@@ -4,7 +4,6 @@ package com.example.cristiandev.pelicula.ui.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,11 @@ import com.example.cristiandev.pelicula.data.model.Pelicula
 import com.example.cristiandev.pelicula.di.Injectable
 import com.example.cristiandev.pelicula.ui.Navigation
 import com.example.cristiandev.pelicula.ui.adapters.PeliculaAdapter
-import com.example.cristiandev.pelicula.utils.Data
+import com.example.cristiandev.pelicula.ui.adapters.SerieAdapter
 import com.example.cristiandev.utils.LifeDisposable
 import com.example.cristiandev.utils.applySchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -29,7 +25,10 @@ import javax.inject.Inject
 class MainFragment : Fragment(),Injectable {
 
     @Inject
-    lateinit var adapter:PeliculaAdapter
+    lateinit var adapterPelicula:PeliculaAdapter
+    @Inject
+    lateinit var adapterSerie:SerieAdapter
+
     val dis : LifeDisposable = LifeDisposable(this)
     @Inject
     lateinit var nav:Navigation
@@ -43,33 +42,66 @@ class MainFragment : Fragment(),Injectable {
     override fun onResume() {
         super.onResume()
 
-        dis add viewModel.getAllPeliculas()
-                .applySchedulers()
-                .subscribeBy (onNext = {
-                    adapter.peliculas = it
-                }, onError = {it.printStackTrace()})
+        val option:String = arguments.getString("option")
+        when(option){
+            "movie_popular" -> dis add viewModel.getPopularPeliculas()
+                    .applySchedulers()
+                    .subscribeBy (onNext = {
+                        adapterPelicula.peliculas = it
+                        recycler.adapter = adapterPelicula
+                    }, onError = {it.printStackTrace()})
+            "movie_top_rated" -> dis add viewModel.getTopRatedPeliculas()
+                    .applySchedulers()
+                    .subscribeBy (onNext = {
+                        adapterPelicula.peliculas = it
+                        recycler.adapter = adapterPelicula
+                    }, onError = {it.printStackTrace()})
+            "movie_upcoming" -> dis add viewModel.getUpcomingPeliculas()
+                    .applySchedulers()
+                    .subscribeBy (onNext = {
+                        adapterPelicula.peliculas = it
+                        recycler.adapter = adapterPelicula
+                    }, onError = {it.printStackTrace()})
+            "series_popular" -> dis add viewModel.getPopularSeries()
+                    .applySchedulers()
+                    .subscribeBy (onNext = {
+                        adapterSerie.series= it
+                        recycler.adapter = adapterSerie
+                    }, onError = {it.printStackTrace()})
+            "series_top_rated" -> dis add viewModel.getTopRatedSeries()
+                    .applySchedulers()
+                    .subscribeBy (onNext = {
+                        adapterSerie.series = it
+                        recycler.adapter = adapterSerie
+                    }, onError = {it.printStackTrace()})
+        }
 
-
-
-        //adapter.peliculas = Data.peliculas
-        recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(activity)
 
-        dis add adapter.clickPelicula
+        dis add adapterPelicula.clickPelicula
                 .applySchedulers()
                 .subscribeBy (
                     onNext = {
-                        goToDetailActivity(it)
+                        nav.navigateToDetailPelicula(it)
                     }
+                )
+        dis add adapterSerie.clickSerie
+                .applySchedulers()
+                .subscribeBy (
+                        onNext = {
+                            nav.navigateToDetailSerie(it)
+                        }
                 )
 
     }
 
-    fun goToDetailActivity(pelicula:Pelicula){
-        nav.navigateToDetail(pelicula)
-    }
-
     companion object {
-        fun instance():MainFragment = MainFragment()
+        fun instance(option:String):MainFragment{
+            val fragment = MainFragment()
+            val args = Bundle()
+            args.putString("option",option)
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
