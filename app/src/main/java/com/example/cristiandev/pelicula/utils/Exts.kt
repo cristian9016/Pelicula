@@ -43,3 +43,13 @@ fun AppCompatActivity.validateForm(message: Int,
     else it.onNext(fields.toList())
     it.onComplete()
 }
+
+fun isOnlineNet():Boolean{
+    try {
+        val process:Process = Runtime.getRuntime().exec("ping -c 1 www.google.es")
+        return (process.waitFor() == 0)
+    }catch (e:Exception){
+        e.printStackTrace()
+    }
+    return false
+}
