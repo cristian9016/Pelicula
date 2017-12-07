@@ -10,5 +10,12 @@
     //menu
     <string name="closed_menu">Menu Cerrado</string>
     <string name="opened_menu">Categorias</string>
+    <string name="movie_popular">movie_popular</string>
+    <string name="movie_top_rated">movie_top_rated</string>
+    <string name="movie_upcoming">movie_upcoming</string>
+    <string name="serie_popular">series_popular</string>
+    <string name="serie_top_rated">series_top_rated</string>
+    <string name="type_pelicula">type_pelicula</string>
+    <string name="type_serie">type_serie</string>
 
 </resources>

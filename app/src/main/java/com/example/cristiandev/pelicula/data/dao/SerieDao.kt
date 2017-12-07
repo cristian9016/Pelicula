@@ -18,8 +18,8 @@ interface SerieDao{
     @Delete
     fun delete(serie: Serie)
 
-    @Query("SELECT * FROM serie")
-    fun all(): Flowable<List<Serie>>
+    @Query("SELECT * FROM serie WHERE genero = :genero")
+    fun all(genero:Int): Flowable<List<Serie>>
 
     @Query("DELETE FROM serie")
     fun deleteAll()

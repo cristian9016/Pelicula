@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
 import com.example.cristiandev.pelicula.R
-import com.example.cristiandev.pelicula.ui.fragments.MainFragment
+import com.example.cristiandev.pelicula.ui.fragments.main.MainFragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -33,7 +33,7 @@ class MainActivity @Inject constructor(): AppCompatActivity(), HasSupportFragmen
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         drawer.addDrawerListener(this)
         nav.setNavigationItemSelectedListener { setContent(it) }
-        putFragment(R.id.container,MainFragment.instance("movie_popular"))
+        putFragment(R.id.container, MainFragment.instance(R.string.movie_popular,R.string.type_pelicula))
     }
 
     fun putFragment(container: Int, fragment: Fragment) {
@@ -46,11 +46,11 @@ class MainActivity @Inject constructor(): AppCompatActivity(), HasSupportFragmen
     fun setContent(item: MenuItem?): Boolean {
         drawer.closeDrawers()
         when(item?.itemId){
-            R.id.movie_popular -> putFragment(R.id.container,MainFragment.instance("movie_popular"))
-            R.id.movie_toprated -> putFragment(R.id.container,MainFragment.instance("movie_top_rated"))
-            R.id.movie_upcoming -> putFragment(R.id.container,MainFragment.instance("movie_upcoming"))
-            R.id.series_popular -> putFragment(R.id.container,MainFragment.instance("series_popular"))
-            R.id.series_top_rated -> putFragment(R.id.container,MainFragment.instance("series_top_rated"))
+            R.id.movie_popular -> putFragment(R.id.container, MainFragment.instance(R.string.movie_popular,R.string.type_pelicula))
+            R.id.movie_toprated -> putFragment(R.id.container, MainFragment.instance(R.string.movie_top_rated,R.string.type_pelicula))
+            R.id.movie_upcoming -> putFragment(R.id.container, MainFragment.instance(R.string.movie_upcoming,R.string.type_pelicula))
+            R.id.series_popular -> putFragment(R.id.container, MainFragment.instance(R.string.serie_popular,R.string.type_serie))
+            R.id.series_top_rated -> putFragment(R.id.container, MainFragment.instance(R.string.serie_top_rated,R.string.type_serie))
         }
         return true
     }

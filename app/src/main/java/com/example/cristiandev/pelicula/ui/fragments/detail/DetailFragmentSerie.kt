@@ -1,4 +1,4 @@
-package com.example.cristiandev.pelicula.ui.fragments
+package com.example.cristiandev.pelicula.ui.fragments.detail
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.cristiandev.pelicula.ui.fragments
+package com.example.cristiandev.pelicula.ui.fragments.main
 
 
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.cristiandev.pelicula.R
-import com.example.cristiandev.pelicula.data.model.Pelicula
 import com.example.cristiandev.pelicula.di.Injectable
 import com.example.cristiandev.pelicula.ui.Navigation
 import com.example.cristiandev.pelicula.ui.adapters.PeliculaAdapter
@@ -19,6 +18,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
+
 /**
  * Created by CristianDev on 26/11/2017.
  */
@@ -28,12 +28,13 @@ class MainFragment : Fragment(),Injectable {
     lateinit var adapterPelicula:PeliculaAdapter
     @Inject
     lateinit var adapterSerie:SerieAdapter
-
     val dis : LifeDisposable = LifeDisposable(this)
     @Inject
     lateinit var nav:Navigation
     @Inject
-    lateinit var viewModel : MainViewModel
+    lateinit var peliculaViewModel : PeliculaViewModel
+    @Inject
+    lateinit var serieViewModel : SerieViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -42,40 +43,25 @@ class MainFragment : Fragment(),Injectable {
     override fun onResume() {
         super.onResume()
 
-        val option:String = arguments.getString("option")
-        when(option){
-            "movie_popular" -> dis add viewModel.getPopularPeliculas()
+        val option:Int = arguments.getInt("option")
+        val type:Int = arguments.getInt("type")
+        if(type==R.string.type_pelicula) {
+            dis add peliculaViewModel.getPeliculas(option)
                     .applySchedulers()
-                    .subscribeBy (onNext = {
+                    .subscribeBy(onNext = {
                         adapterPelicula.peliculas = it
                         recycler.adapter = adapterPelicula
-                    }, onError = {it.printStackTrace()})
-            "movie_top_rated" -> dis add viewModel.getTopRatedPeliculas()
+                    }
+                    )
+        }else{
+            dis add serieViewModel.getSeries(option)
                     .applySchedulers()
-                    .subscribeBy (onNext = {
-                        adapterPelicula.peliculas = it
-                        recycler.adapter = adapterPelicula
-                    }, onError = {it.printStackTrace()})
-            "movie_upcoming" -> dis add viewModel.getUpcomingPeliculas()
-                    .applySchedulers()
-                    .subscribeBy (onNext = {
-                        adapterPelicula.peliculas = it
-                        recycler.adapter = adapterPelicula
-                    }, onError = {it.printStackTrace()})
-            "series_popular" -> dis add viewModel.getPopularSeries()
-                    .applySchedulers()
-                    .subscribeBy (onNext = {
-                        adapterSerie.series= it
-                        recycler.adapter = adapterSerie
-                    }, onError = {it.printStackTrace()})
-            "series_top_rated" -> dis add viewModel.getTopRatedSeries()
-                    .applySchedulers()
-                    .subscribeBy (onNext = {
+                    .subscribeBy(onNext = {
                         adapterSerie.series = it
                         recycler.adapter = adapterSerie
-                    }, onError = {it.printStackTrace()})
+                    }
+                    )
         }
-
         recycler.layoutManager = LinearLayoutManager(activity)
 
         dis add adapterPelicula.clickPelicula
@@ -96,10 +82,11 @@ class MainFragment : Fragment(),Injectable {
     }
 
     companion object {
-        fun instance(option:String):MainFragment{
+        fun instance(option:Int,type:Int): MainFragment {
             val fragment = MainFragment()
             val args = Bundle()
-            args.putString("option",option)
+            args.putInt("option",option)
+            args.putInt("type",type)
             fragment.arguments = args
             return fragment
         }

@@ -1,8 +1,8 @@
 package com.example.cristiandev.pelicula.di.module
 
 import com.example.cristiandev.pelicula.di.FragmentScope
-import com.example.cristiandev.pelicula.ui.fragments.DetailFragmentMovie
-import com.example.cristiandev.pelicula.ui.fragments.MainFragment
+import com.example.cristiandev.pelicula.ui.fragments.detail.DetailFragmentMovie
+import com.example.cristiandev.pelicula.ui.fragments.main.MainFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

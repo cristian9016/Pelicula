@@ -18,8 +18,8 @@ interface PeliculaDao{
     @Delete
     fun delete(pelicula: Pelicula)
 
-    @Query("SELECT * FROM pelicula")
-    fun all(): Flowable<List<Pelicula>>
+    @Query("SELECT * FROM pelicula WHERE genero = :genero")
+    fun all(genero:Int): Flowable<List<Pelicula>>
 
     @Query("DELETE FROM pelicula")
     fun deleteAll()

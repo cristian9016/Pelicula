@@ -26,7 +26,7 @@ object DateConverter{
 
 }
 
-@Database(entities = arrayOf(Pelicula::class, Serie::class),version = 2)
+@Database(entities = arrayOf(Pelicula::class, Serie::class),version = 3)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase: RoomDatabase(){
 

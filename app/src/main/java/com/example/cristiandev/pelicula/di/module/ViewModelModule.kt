@@ -2,7 +2,8 @@ package com.example.cristiandev.pelicula.di.module
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.example.cristiandev.pelicula.ui.fragments.MainViewModel
+import com.example.cristiandev.pelicula.ui.fragments.main.PeliculaViewModel
+import com.example.cristiandev.pelicula.ui.fragments.main.SerieViewModel
 import com.example.cristiandev.pelicula.utils.AppViewModelFactory
 import dagger.Binds
 import dagger.MapKey
@@ -27,6 +28,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+    @ViewModelKey(PeliculaViewModel::class)
+    abstract fun bindPeliculaViewModel(viewModel: PeliculaViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SerieViewModel::class)
+    abstract fun bindSerieViewModel(viewModel: SerieViewModel): ViewModel
 }

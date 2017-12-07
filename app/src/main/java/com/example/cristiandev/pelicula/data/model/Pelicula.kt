@@ -18,8 +18,9 @@ class Pelicula (@PrimaryKey var id_pelicula:Long?,
                 var overview:String,
                 var poster_path:String,
                 var release_date:String,
-                var vote_average:Float):Parcelable{
+                var vote_average:Float,
+                var genero:Int):Parcelable{
     @Ignore
-    constructor(id: Long,title: String,overview: String,poster_path: String,release_date: String,vote_average: Float):
-            this(null,id,title,overview,poster_path,release_date,vote_average)
+    constructor(id: Long,title: String,overview: String,poster_path: String,release_date: String,vote_average: Float,genero: Int):
+            this(null,id,title,overview,poster_path,release_date,vote_average,genero)
 }

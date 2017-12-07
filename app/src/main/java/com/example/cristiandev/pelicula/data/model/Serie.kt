@@ -17,8 +17,9 @@ class Serie (@PrimaryKey var id_serie:Long?,
              var overview:String,
              var poster_path:String,
              var first_air_date:String,
-             var vote_average:Float): Parcelable{
+             var vote_average:Float,
+             var genero:Int): Parcelable{
     @Ignore
-    constructor(id: Long,name: String,overview: String,poster_path: String,first_air_date: String,vote_average: Float):
-            this(null,id,name,overview,poster_path,first_air_date,vote_average)
+    constructor(id: Long,name: String,overview: String,poster_path: String,first_air_date: String,vote_average: Float,genero: Int):
+            this(null,id,name,overview,poster_path,first_air_date,vote_average,genero)
 }
